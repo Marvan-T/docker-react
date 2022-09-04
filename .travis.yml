@@ -1,11 +1,11 @@
-language: generic #some new requirenemnt in travis
+language: generic 
 
-sudo: required # we need super user privileages
+sudo: required 
 services:
-  - docker #we need docker installed
+  - docker 
 
-before_install: # series of commands to execute before we run the tests (think setup before doing something)
+before_install: 
   - docker build -t augmart/docker-react -f Dockerfile.dev .  
 
-scripts: # commands that should run to do what you need to do (in this case running our tests)
+scripts: 
   - docker run -e CI=true augmart/docker-react npm run test
