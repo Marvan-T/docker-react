@@ -9,3 +9,15 @@ before_install: # series of commands to execute before we run the tests (think s
 
 scripts: # commands that should run to do what you need to do (in this case running our tests)
   - docker run -e CI=true augmart/docker-react npm run test
+
+deploy:
+  provider: elasticbeanstalk #automatically set config to deploy to elasticbeanstalk
+  region: "eu-west-2" #region of our elastic beanstalk instance
+  app: "docker-react" 
+  env: "Dockerreact-env"
+  bucket_name: "elasticbeanstalk-eu-west-2-290680790199"
+  bucket_path: "docker-react" #there's no folder created by default (created on first deploy). Should be equal to the app name
+  on:
+    branch: master #only the master branch
+  access_key_id: $AWS_ACCESS_KEY #referring to environemnet variables that we set up
+  secret_access_key: $AWS_SECRET_KEY 
